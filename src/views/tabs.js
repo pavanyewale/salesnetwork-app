@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {AppRegistry, StyleSheet} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -21,48 +21,50 @@ const RenderIcon = props => {
 const RenderSelectedIcon = props => {
   return <Icon name={props.name} size={px2dp(22)} color={PrimaryColor} />;
 };
-export default class Tabs extends Component {
-  state = {
-    selectedTab: 'home',
-  };
 
-  render() {
-    return (
-      <TabNavigator style={styles.container}>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'home'}
-          selectedTitleStyle={styles.tabTitle}
-          title="HOME"
-          renderIcon={() => <RenderIcon name="home" />}
-          renderSelectedIcon={() => <RenderSelectedIcon name="home" />}
-          badgeText={''}
-          onPress={() => this.setState({selectedTab: 'home'})}>
-          <Home />
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'search'}
-          selectedTitleStyle={styles.tabTitle}
-          title="SEARCH"
-          renderIcon={() => <RenderIcon name="search" />}
-          renderSelectedIcon={() => <RenderSelectedIcon name="search" />}
-          badgeText=""
-          onPress={() => this.setState({selectedTab: 'search'})}>
-          <Search />
-        </TabNavigator.Item>
-        <TabNavigator.Item
-          selected={this.state.selectedTab === 'account'}
-          title="ACCOUNT"
-          badgeText={undefined}
-          selectedTitleStyle={styles.tabTitle}
-          renderIcon={() => <RenderIcon name="user" />}
-          renderSelectedIcon={() => <RenderSelectedIcon name="user" />}
-          onPress={() => this.setState({selectedTab: 'account'})}>
-          <Profile />
-        </TabNavigator.Item>
-      </TabNavigator>
-    );
-  }
-}
+export const Tabs = () => {
+  const [selectedTab, setSelectedTab] = useState('home');
+  return (
+    <TabNavigator style={styles.container}>
+      <TabNavigator.Item
+        selected={selectedTab === 'home'}
+        selectedTitleStyle={styles.selectedTitleStyle}
+        title="HOME"
+        renderIcon={() => <RenderIcon name="home" />}
+        renderSelectedIcon={() => <RenderSelectedIcon name="home" />}
+        badgeText={''}
+        onPress={() => {
+          setSelectedTab('home');
+        }}>
+        <Home />
+      </TabNavigator.Item>
+      <TabNavigator.Item
+        selected={selectedTab === 'search'}
+        selectedTitleStyle={styles.selectedTitleStyle}
+        title="SEARCH"
+        renderIcon={() => <RenderIcon name="search" />}
+        renderSelectedIcon={() => <RenderSelectedIcon name="search" />}
+        badgeText=""
+        onPress={() => {
+          setSelectedTab('search');
+        }}>
+        <Search />
+      </TabNavigator.Item>
+      <TabNavigator.Item
+        selected={selectedTab === 'account'}
+        title="ACCOUNT"
+        badgeText={undefined}
+        selectedTitleStyle={styles.selectedTitleStyle}
+        renderIcon={() => <RenderIcon name="user" />}
+        renderSelectedIcon={() => <RenderSelectedIcon name="user" />}
+        onPress={() => {
+          setSelectedTab('account');
+        }}>
+        <Profile />
+      </TabNavigator.Item>
+    </TabNavigator>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -71,8 +73,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
   },
-  tabTitle: {
+  selectedTitleStyle: {
     color: PrimaryColor,
+  },
+  titleStyle: {
+    color: SecondaryColor,
   },
 });
 
