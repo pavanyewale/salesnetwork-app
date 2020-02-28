@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
-import {AppRegistry, StyleSheet} from 'react-native';
+import {AppRegistry} from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Dimensions} from 'react-native';
-import {PrimaryColor, SecondaryColor} from '../assets/color';
-import {Home} from './home';
-import {Profile} from './profile';
-import {Search} from './search';
+import {Home} from '../../screens/home';
+import {Profile} from '../../screens/profile';
+import {Search} from '../../screens/search';
+import styles from './style';
+import {PrimaryColor, SecondaryColor} from '../../assets/color';
+
 const deviceW = Dimensions.get('window').width;
 const basePx = 375;
 
@@ -65,20 +67,5 @@ export const Tabs = () => {
     </TabNavigator>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-  },
-  selectedTitleStyle: {
-    color: PrimaryColor,
-  },
-  titleStyle: {
-    color: SecondaryColor,
-  },
-});
 
 AppRegistry.registerComponent('salesnetwork', () => Tabs);
